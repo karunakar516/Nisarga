@@ -6,9 +6,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 
 export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
-  const [user] = useAuthState(auth);
+  const [scrolled, setScrolled] = useState(false); // Added state for scroll tracking
+  const [activeLink, setActiveLink] = useState("home"); // Added state for active link
+  const [user] = useAuthState(auth); // Added state for user
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 50) {
@@ -23,14 +23,15 @@ export const NavBar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
+    
   };
   const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider);
     console.log(result);
-  };
-
+  };
   const signUserOut = async () => {
     await signOut(auth);
   };
@@ -96,9 +97,9 @@ export const NavBar = () => {
                   src={user?.photoURL || ""}
                   style={{
                     borderRadius: "50%",
-                    border: "4px solid black",
-                    width: "75px",
-                    height: "75px",
+                    border: "1px solid black",
+                    width: "35px",
+                    height: "35px",
                   }}
                 />
                 <button className="vvd" onClick={signUserOut}>
